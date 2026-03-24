@@ -1,0 +1,243 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% block title %}<title>About</title>{% endblock %}
+
+{% block contents %}
+
+<style>
+
+/* 🔥 FULL WIDTH */
+.container-custom {
+  width: 95%;
+  margin: auto;
+}
+
+/* 🔥 SLIDER */
+.slider {
+  position: relative;
+  overflow: hidden;
+  min-height: 550px;
+}
+
+/* 🔥 SLIDE */
+.slide {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.7s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 🔥 CARD */
+.card-custom {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0px 15px 35px rgba(0,0,0,0.15);
+}
+
+/* 🔥 IMAGE */
+.slide img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* 🔥 TEXT */
+.card-custom h2 {
+  color: #d9534f;
+  margin-bottom: 15px;
+}
+
+.card-custom p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.card-custom ul li {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.card-custom b {
+  color: #c9302c;
+}
+
+.icon {
+  color: #d9534f;
+  margin-right: 10px;
+}
+
+/* 🔥 BUTTON */
+.slide-btn {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  margin: 5px;
+  transition: 0.3s;
+}
+
+.slide-btn:hover {
+  background: #c9302c;
+  transform: scale(1.05);
+}
+
+</style>
+
+<div class="container-custom mt-5">
+
+<h1 class="text-center text-danger mb-5">About Blood Donation</h1>
+
+<div class="slider">
+
+<!-- SLIDE 1 -->
+<div class="slide active">
+  <div class="card-custom row align-items-center">
+    <div class="col-md-6">
+      <img src="https://images.unsplash.com/photo-1615461066159-fea0960485d5">
+    </div>
+    <div class="col-md-6">
+      <h2>Benefits of Donating Blood</h2>
+      <p>Donating blood improves health and helps save lives.</p>
+      <ul>
+        <li><i class="fas fa-heart icon"></i>Reduce stress</li>
+        <li><i class="fas fa-smile icon"></i>Better mental health</li>
+        <li><i class="fas fa-dumbbell icon"></i>Stay healthy</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide">
+  <div class="card-custom row align-items-center">
+    <div class="col-md-6">
+      <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b">
+    </div>
+    <div class="col-md-6">
+      <h2>Health Checkup</h2>
+      <p>Quick screening before donation ensures safety.</p>
+      <ul>
+        <li><i class="fas fa-heartbeat icon"></i>BP check</li>
+        <li><i class="fas fa-vial icon"></i>Hemoglobin</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide">
+  <div class="card-custom row align-items-center">
+    <div class="col-md-6">
+      <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde">
+    </div>
+    <div class="col-md-6">
+      <h2>Safe Process</h2>
+      <p>100% safe and hygienic donation.</p>
+      <ul>
+        <li><i class="fas fa-shield-alt icon"></i>Safe</li>
+        <li><i class="fas fa-user-md icon"></i>Doctors</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide">
+  <div class="card-custom row align-items-center">
+    <div class="col-md-6">
+      <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67">
+    </div>
+    <div class="col-md-6">
+      <h2>Before Donation</h2>
+      <p>Be healthy and hydrated before donating.</p>
+      <ul>
+        <li><i class="fas fa-user icon"></i>Age limit</li>
+        <li><i class="fas fa-glass-water icon"></i>Drink water</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 (PROCESS) -->
+<div class="slide">
+  <div class="card-custom row align-items-center">
+    <div class="col-md-6">
+      <img src="https://images.unsplash.com/photo-1612277795421-9bc7706a4a34">
+    </div>
+    <div class="col-md-6">
+      <h2>How Blood Donation Works</h2>
+      <p>Simple step-by-step process:</p>
+      <ul>
+        <li><i class="fas fa-user-check icon"></i><b>Registration</b></li>
+        <li><i class="fas fa-stethoscope icon"></i><b>Health Check</b></li>
+        <li><i class="fas fa-syringe icon"></i><b>Donation</b></li>
+        <li><i class="fas fa-cookie-bite icon"></i><b>Refreshment</b></li>
+        <li><i class="fas fa-heart icon"></i><b>Used for patients</b></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="text-center mt-4">
+  <button onclick="prevSlide()" class="slide-btn">Prev</button>
+  <button onclick="nextSlide()" class="slide-btn">Next</button>
+</div>
+
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+let autoSlide;
+
+function showSlide(index){
+  slides.forEach((slide,i)=>{
+    slide.classList.remove("active");
+    if(i === index){
+      slide.classList.add("active");
+    }
+  });
+}
+
+function nextSlide(){
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+function prevSlide(){
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+}
+
+function startAutoSlide(){
+  autoSlide = setInterval(nextSlide, 4000);
+}
+
+function stopAutoSlide(){
+  clearInterval(autoSlide);
+}
+
+showSlide(currentSlide);
+startAutoSlide();
+
+document.querySelector(".slider").addEventListener("mouseenter", stopAutoSlide);
+document.querySelector(".slider").addEventListener("mouseleave", startAutoSlide);
+
+document.addEventListener("keydown", function(e){
+  if(e.key === "ArrowRight") nextSlide();
+  if(e.key === "ArrowLeft") prevSlide();
+});
+</script>
+
+{% endblock %}

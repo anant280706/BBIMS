@@ -1,0 +1,127 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Registration Form</title>
+{% endblock %}
+
+{% block contents %}
+
+<style>
+  body {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  }
+
+  .container-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .form-card {
+    width: 100%;
+    max-width: 900px;
+    padding: 34px 36px 30px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 12px 45px rgba(0,0,0,0.18);
+  }
+
+  .image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  h4 {
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 6px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    border: 1px solid #d9d9d9;
+    transition: 0.25s ease;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    letter-spacing: 0.3px;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: #ff4b2b;
+    box-shadow: 0 0 8px rgba(255,75,43,0.3);
+    outline: none;
+  }
+
+  .btn-danger {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    border: none;
+    transition: 0.3s;
+  }
+
+  .btn-danger:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  @media(max-width: 768px) {
+    .form-card {
+      max-width: 100%;
+      padding: 20px;
+    }
+
+    .col-md-6 {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="container-box">
+  <div class="form-card">
+
+    <form action="" method="post" novalidate>
+      {% csrf_token %}
+
+      <div class="text-center mb-3">
+        <img src="{% static 'images/registration.jpg' %}" class="image" />
+      </div>
+
+      <h4 class="text-center text-danger text-uppercase mb-4">
+        Registration Form
+      </h4>
+
+      <div class="row" style="row-gap: 10px;">
+        {% for field in forms %}
+        <div class="col-md-6">
+          {{ field.label_tag }}
+          {{ field }}
+        </div>
+        {% endfor %}
+      </div>
+
+      <div style="display:flex; justify-content:center; margin-top:10px;">
+        <button type="submit" class="btn btn-danger px-5" style="min-width:180px;">Register</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
